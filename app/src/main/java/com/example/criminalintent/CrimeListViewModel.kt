@@ -11,7 +11,7 @@ class CrimeListViewModel : ViewModel() {
       val crime =
           Crime(
               id = UUID.randomUUID(),
-              title = "Crime #${i+1}",
+              title = "Crime of #${i+1}",
               date = Date(),
               isSolved = Random.nextBoolean())
       crimes += crime

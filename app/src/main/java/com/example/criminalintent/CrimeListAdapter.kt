@@ -1,11 +1,22 @@
 package com.example.criminalintent
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criminalintent.databinding.ListItemCrimeBinding
+import com.google.android.material.snackbar.Snackbar
 
-class CrimeHolder(val binding: ListItemCrimeBinding) : RecyclerView.ViewHolder(binding.root) {}
+class CrimeHolder(private val binding: ListItemCrimeBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+  fun bind(crime: Crime) {
+    binding.crimeTitle.text = crime.title
+    binding.crimeDate.text = crime.date.toString()
+    binding.root.setOnClickListener { view: View ->
+      Snackbar.make(view, "Hi", Snackbar.LENGTH_SHORT).show()
+    }
+  }
+}
 
 class CrimeListAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<CrimeHolder>() {
 
@@ -17,10 +28,7 @@ class CrimeListAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<C
 
   override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
     val crime = crimes[position]
-    holder.apply {
-      binding.crimeTitle.text = crime.title
-      binding.crimeDate.text = crime.date.toString()
-    }
+    holder.bind(crime)
   }
 
   override fun getItemCount() = crimes.size

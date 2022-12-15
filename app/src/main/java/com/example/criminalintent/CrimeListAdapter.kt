@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criminalintent.databinding.ListItemCrimeBinding
 import com.google.android.material.snackbar.Snackbar
+import java.time.format.DateTimeFormatter
 
 class CrimeHolder(private val binding: ListItemCrimeBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -15,6 +16,12 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
     binding.root.setOnClickListener { view: View ->
       Snackbar.make(view, "Hi", Snackbar.LENGTH_SHORT).show()
     }
+    binding.crimeSolved.visibility =
+        if (crime.isSolved) {
+          View.VISIBLE
+        } else {
+          View.GONE
+        }
   }
 }
 

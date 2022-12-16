@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.criminalintent.databinding.FragmentCrimeListBinding
 import kotlinx.coroutines.launch
 
-
 private const val TAG = "CrimeListFragment"
 
 class CrimeListFragment : Fragment() {

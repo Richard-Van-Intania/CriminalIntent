@@ -5,16 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criminalintent.databinding.ListItemCrimeBinding
-import com.google.android.material.snackbar.Snackbar
+import java.util.UUID
 
 class CrimeHolder(private val binding: ListItemCrimeBinding) :
     RecyclerView.ViewHolder(binding.root) {
-  fun bind(crime: Crime) {
+  fun bind(crime: Crime, onCrimeClicked: (crimeId: UUID) -> Unit) {
     binding.crimeTitle.text = crime.title
     binding.crimeDate.text = crime.date.toString()
-    binding.root.setOnClickListener { view: View ->
-      Snackbar.make(view, "Hi", Snackbar.LENGTH_SHORT).show()
-    }
+    binding.root.setOnClickListener { onCrimeClicked(crime.id) }
     binding.crimeSolved.visibility =
         if (crime.isSolved) {
           View.VISIBLE
@@ -24,7 +22,10 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
   }
 }
 
-class CrimeListAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<CrimeHolder>() {
+class CrimeListAdapter(
+    private val crimes: List<Crime>,
+    private val onCrimeClicked: (crimeId: UUID) -> Unit
+) : RecyclerView.Adapter<CrimeHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
     val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +35,7 @@ class CrimeListAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<C
 
   override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
     val crime = crimes[position]
-    holder.bind(crime)
+    holder.bind(crime, onCrimeClicked)
   }
 
   override fun getItemCount() = crimes.size

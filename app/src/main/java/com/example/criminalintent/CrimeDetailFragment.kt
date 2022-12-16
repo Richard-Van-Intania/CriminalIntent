@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import com.example.criminalintent.databinding.FragmentCrimeDetailBinding
 import java.util.*
 
-
-
 class CrimeDetailFragment : Fragment() {
 
   private lateinit var crime: Crime
